@@ -21,13 +21,11 @@ clip_text_encoder_names = [f"clip_text_encoder_{name[5:]}" for name in clip_mode
 for name in clip_model_names + clip_image_encoder_names + clip_text_encoder_names:
     model_weights_path = os.path.join(curr_dir, "weights", f"{name}.pth")
     model_config_path = os.path.join(curr_dir, "configs", f"{name}.json")
-    print("여기 2")
     if not os.path.exists(os.path.join(curr_dir, "weights", f"{name}.pth")) or not os.path.exists(os.path.join(curr_dir, "configs", f"{name}.json")):
         prepare()
         break
 
 for name in clip_model_names + clip_image_encoder_names + clip_text_encoder_names:
-    print("이것도 하늕중? : ", name)
     assert os.path.exists(os.path.join(curr_dir, "weights", f"{name}.pth")), f"Missing {name}.pth in weights folder. Please run models/clip/prepare.py to download the weights."
     assert os.path.exists(os.path.join(curr_dir, "configs", f"{name}.json")), f"Missing {name}.json in configs folder. Please run models/clip/prepare.py to download the configs."
 

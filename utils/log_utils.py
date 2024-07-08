@@ -74,10 +74,14 @@ def update_eval_result(
     hist_scores: Dict[str, List[float]],
     best_scores: Dict[str, List[float]],
     writer: SummaryWriter,
-    state_dict: OrderedDict[str, Tensor],
+    state_dict: Dict[str, Tensor],
     ckpt_dir: str,
 ) -> Tuple[Dict[str, List[float]], Dict[str, float]]:
+    
+    state_dict = OrderedDict()
     os.makedirs(ckpt_dir, exist_ok=True)
+
+    print("type : ", type(state_dict))
     for k, v in curr_scores.items():
         hist_scores[k].append(v)
         writer.add_scalar(f"val/{k}", v, epoch)
