@@ -1,8 +1,6 @@
 from typing import List, Tuple, Optional, Any, Union
-
 from .model import _classifier, _regressor, Classifier, Regressor
 from .clip import _clip_ebc, CLIP_EBC
-
 
 clip_names = ["resnet50", "resnet50x4", "resnet50x16", "resnet50x64", "resnet101", "vit_b_16", "vit_b_32", "vit_l_14"]
 

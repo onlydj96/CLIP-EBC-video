@@ -37,6 +37,7 @@ def main(args):
     print("Testing a trained model on the NWPU-Crowd test set.")
     device = torch.device(args.device)
     _ = get_config(vars(args).copy(), mute=False)
+    print("device : ", device)
     
     with open(os.path.join(current_dir, "configs", f"reduction_{args.reduction}.json"), "r") as f:
         config = json.load(f)[str(args.truncation)]["nwpu"]
@@ -48,7 +49,6 @@ def main(args):
     args.bins = bins
     args.anchor_points = anchor_points
     torch.cuda.reset_peak_memory_stats()
-
     model = get_model(
         backbone=args.model,
         input_size=args.input_size, 
@@ -75,7 +75,7 @@ def main(args):
     
     print(f"Peak memory usage: {torch.cuda.max_memory_allocated() / (1024 ** 2)} MB")
 
-    dataset = CustomDataset(root="assets", return_filename=True)
+    dataset = CustomDataset(root="images", return_filename=True)
 
     image_ids = []
     preds = []
@@ -113,8 +113,8 @@ def main(args):
 
 
         # prediction image SAVE
-        save_prediction_image_with_dot(orig_image_path, pred_count, pred_coords, f"result/dot/{image_ids[-1]}_dot_prediction.png")
-        save_prediction_image_with_heatmap(orig_image_path, pred_density, f"result/image_with_heatmap/{image_ids[-1]}_heatmap_prediction.png")
+        save_prediction_image_with_dot(orig_image_path, pred_count, pred_coords, f"{image_ids[-1]}_dot_prediction.png")
+        save_prediction_image_with_heatmap(orig_image_path, pred_density, f"{image_ids[-1]}_heatmap_prediction.png")
 
     result_dir = os.path.join(current_dir, "nwpu_test_results")
     os.makedirs(result_dir, exist_ok=True)

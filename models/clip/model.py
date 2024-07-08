@@ -5,11 +5,9 @@ import numpy as np
 import os
 import math
 from typing import List, Tuple, Union, Optional
-
 from . import _clip
 from ..utils import _init_weights, make_resnet_layers, Bottleneck, BasicBlock
 from .utils import format_count
-
 curr_dir = os.path.abspath(os.path.dirname(__file__))
 
 
